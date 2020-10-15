@@ -304,6 +304,7 @@ class portfolio_MVP:
         stdDev = math.sqrt(variance)
         print("\nThe Std.Dev of the portfolio is:")
         print(stdDev)
+
         return [E, variance, stdDev]
 
     def W_MVP_Given_Ev(this, Ev):
@@ -324,6 +325,7 @@ class portfolio_MVP:
         print("*"*20)
 
     def calculate_ab(this):
+        print("*"*20)
         print("\ncalculating for a and b:")
         print("[a, b].T = M^-1 * [m, u].T * C^-1")
         this.matrix_ab = np.matmul(np.matmul(this.MmatrixInv, np.array([this.m, this.u])), this.CInverse)
@@ -331,6 +333,11 @@ class portfolio_MVP:
         this.b = this.matrix_ab[1]
         print("this is vector a: ", this.a)
         print("this is vector b: ", this.b)
+        weights = ["w"+str(i+1) for i in range(len(this.a))]
+        print(f"\nequations parametereized by MUv:")
+        for i in range(len(this.a)):
+            print(f"{weights[i]} = {this.a[i]}*MUv + {this.b[i]}")
+        print("*"*20)
 
     def compute_W_given_E(this, Ev):
         W_given_EKv = (Ev*this.a) + this.b
@@ -356,6 +363,8 @@ class portfolio_MVP:
         xy_table = pd.DataFrame([xVal, yVal], index=["x axis", "y axis"])
         print("sample points:")
         print(xy_table)
+
+
 
     def compute_slope(this, w0, w1, x, y):
         # modifying the indecies
